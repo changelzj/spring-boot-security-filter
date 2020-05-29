@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <h1>登录</h1>
+    <hr>
+    用户名 <input type="text" id="username"> <br>
+    密码 <input type="password" id="password"> <br>
+    <button onclick="login()">登录</button>
+    <hr>
+    <a href="/html/index.html">首页</a>
+    <a href="/sys/logout">退出登录</a>
+</body>
+</html>
+
+<script type="text/javascript">
+
+function login() {
+    $.ajax({
+        type:"post",
+        url:"/sys/login",
+        data:JSON.stringify({
+            username:$('#username').val(),
+            password:$('#password').val()
+        }),
+        contentType:"application/json;charset=utf-8",
+        success: function(data) {
+            if (data.code === 0) {
+                alert("登录成功了");
+            } else {
+                alert(data.msg);
+            }
+        }
+    })
+}
+
+
+</script>
+
+
